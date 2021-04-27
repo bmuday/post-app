@@ -17,7 +17,12 @@ app.use(express.urlencoded({ extended: false }));
 // HTTP Request Logger
 app.use(logger("combined"));
 
+// For deployment
+// process.env.PORT
+// process.env.NODE_ENV => production or undefined
 if (process.env.NODE_ENV === "production") {
+  // serve static content
+  // npm run build
   app.use(express.static("client/build"));
 }
 
