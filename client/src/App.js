@@ -76,7 +76,7 @@ const App = () => {
     <Fragment>
       <div id="container">
         <h1 id="title">Post App - Fullstack application(MERN)</h1>
-        <h2 id="subtitle">Welcome to my App!</h2>
+        <h2 id="subtitle">Welcome to my super App!</h2>
         <form id="form" onSubmit={handleSubmit}>
           <div className="form-input">
             <input
