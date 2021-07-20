@@ -13,7 +13,7 @@ const App = () => {
 
   const getPosts = async () => {
     await axios
-      .get("/")
+      .get("http://localhost:5000/posts")
       .then((res) => {
         setPosts(res.data);
       })
@@ -30,7 +30,7 @@ const App = () => {
 
   const savedPost = async (payload) =>
     await axios({
-      url: "/save",
+      url: "http://localhost:5000/posts/save",
       method: "POST",
       data: payload,
     })
