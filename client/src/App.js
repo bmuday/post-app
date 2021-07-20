@@ -15,8 +15,7 @@ const App = () => {
     await axios
       .get("http://localhost:5000/posts")
       .then((res) => {
-        const postsArray = res.data;
-        setPosts(postsArray);
+        setPosts(res.data);
       })
       .catch(() => {
         alert("Error retrieving data!");
