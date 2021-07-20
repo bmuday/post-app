@@ -1,10 +1,48 @@
-import { React, Fragment, useState, useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import axios from "axios";
 
 const App = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [posts, setPosts] = useState([]);
+
+  const resetUserInputs = () => {
+    setTitle("");
+    setBody("");
+  };
+
+  const getPosts = async () => {
+    await axios
+      .get("http://localhost:5000/posts")
+      .then((res) => {
+        const postsArray = res.data;
+        setPosts(postsArray);
+      })
+      .catch(() => {
+        alert("Error retrieving data!");
+      });
+  };
+
+  useEffect(() => {
+    getPosts();
+  }, []);
+
+  /* console.log(posts); */
+
+  const savedPost = async (payload) =>
+    await axios({
+      url: "/save",
+      method: "POST",
+      data: payload,
+    })
+      .then(() => {
+        console.log("Data has been sent to the server");
+        resetUserInputs();
+        getPosts();
+      })
+      .catch(() => {
+        alert("Internal server error");
+      });
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
@@ -16,64 +54,18 @@ const App = () => {
     }
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const payload = {
       title,
       body,
     };
     //console.log(payload);
-
-    axios({
-      url: "/api/save",
-      method: "POST",
-      data: payload,
-    })
-      .then(() => {
-        console.log("Data has been sent to the server");
-        resetUserInputs();
-        getPosts();
-      })
-      .catch(() => {
-        console.log("Internal server error");
-      });
+    savedPost(payload);
   };
-
-  const resetUserInputs = () => {
-    setTitle("");
-    setBody("");
-  };
-
-  const getPosts = () => {
-    axios({
-      url: "/api",
-    })
-      .then((response) => {
-        const data = response.data;
-        setPosts(data);
-      })
-      .catch(() => {
-        alert("Error retrieving data!");
-      });
-  };
-
-  const displayPosts = (posts) => {
-    //console.log(posts);
-    if (!posts.length) return null;
-    return posts.map((post, index) => (
-      <div className="posts" key={index}>
-        <h3 className="post-title">{post.title}</h3>
-        <p className="post-body">{post.body}</p>
-      </div>
-    ));
-  };
-
-  useEffect(() => {
-    getPosts();
-  }, []);
 
   return (
-    <Fragment>
+    <>
       <div id="container">
         <h1 id="title">Post App - Fullstack application(MERN)</h1>
         <h2 id="subtitle">Welcome to my super App!</h2>
@@ -97,9 +89,16 @@ const App = () => {
           </div>
           <button type="submit">Submit</button>
         </form>
-        <div className="posts-container">{displayPosts(posts)}</div>
+        <div className="posts-container">
+          {posts.map((post, index) => (
+            <div className="posts" key={index}>
+              <h3 className="post-title">{post.title}</h3>
+              <p className="post-body">{post.body}</p>
+            </div>
+          ))}
+        </div>
       </div>
-    </Fragment>
+    </>
   );
 };
 

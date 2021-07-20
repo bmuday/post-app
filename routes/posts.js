@@ -1,7 +1,4 @@
-const express = require("express");
-
-const router = express.Router();
-
+const router = require("express").Router();
 const Post = require("../models/Post");
 
 // ROUTES
@@ -23,8 +20,7 @@ router.post("/save", (req, res) => {
   newPost.save((err) => {
     if (err) {
       res.status(500).json({
-        msg:
-          "Sorry, your data has not been saved due to an internal server error.",
+        msg: "Sorry, your data has not been saved due to an internal server error.",
       });
       return;
     }

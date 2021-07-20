@@ -7,7 +7,7 @@
     "heroku-postbuild": "cd client && npm install && npm run build",
     "start": "node server.js",
     "client": "cd client && npm start",
-    "dev": "concurrently -n 'server,client' -c 'red, green' ' node server.js ' ' npm run client ' "
+    "dev": "concurrently -n 'server,client' -c 'green, blue' ' npm start ' ' npm run client ' "
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "concurrently": "^6.0.2",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.12.5",
