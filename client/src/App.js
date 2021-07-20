@@ -31,7 +31,7 @@ const App = () => {
 
   const savedPost = async (payload) =>
     await axios({
-      url: "/save",
+      url: "http://localhost:5000/posts/save",
       method: "POST",
       data: payload,
     })
