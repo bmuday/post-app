@@ -13,7 +13,7 @@ const getPosts = (req, res) => {
 const newPost = (req, res) => {
   //console.log(`Body: ${req.body}`);
   const data = req.body;
-  const newPost = new Post(data);
+  const newPost = new Post({ ...data, date: new Date() });
 
   newPost.save((err) => {
     if (err) {
