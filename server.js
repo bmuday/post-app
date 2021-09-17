@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(logger("combined"));
 
 // Routes middlewares
-const postRoutes = require("./routes/posts");
+const postRoutes = require("./routes/post");
 app.use("/posts", postRoutes);
 
 // For deployment

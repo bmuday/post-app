@@ -5,9 +5,10 @@
   "main": "server.js",
   "scripts": {
     "heroku-postbuild": "cd client && npm install && npm run build",
-    "start": "node server.js",
+    "start-server": "node .",
+    "dev": "nodemon .",
     "client": "cd client && npm start",
-    "dev": "concurrently -n 'server,client' -c 'green, blue' ' npm start ' ' npm run client ' "
+    "start": "concurrently -n 'server,client' -c 'green, blue' ' npm run start-server ' ' npm run client ' "
   },
   "keywords": [],
   "author": "",

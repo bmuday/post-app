@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 // DB connection
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/post-app", {
