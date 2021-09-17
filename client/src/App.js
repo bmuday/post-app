@@ -13,7 +13,7 @@ const App = () => {
 
   const getPosts = async () => {
     await axios
-      .get("http://localhost:5000/posts")
+      .get("https://post-app-deploy.herokuapp.com/posts")
       .then((res) => {
         setPosts(res.data);
       })
@@ -30,7 +30,7 @@ const App = () => {
 
   const savedPost = async (payload) =>
     await axios({
-      url: "http://localhost:5000/posts/save",
+      url: "https://post-app-deploy.herokuapp.com/posts/save",
       method: "POST",
       data: payload,
     })
